@@ -47,14 +47,14 @@ Given a source domain {**Xs**, *Ys*} and a target domain {**Xt**, *Yt*}, the alg
 from transfertools.models import LocIT, CBIT
 
 # train
-detector = LocIT()
-detector.fit(Xs, Xt)
+transfor = LocIT()
+transfor.fit(Xs, Xt)
 
 # predict
-Xs_trans = detector.transfer(Xs)
+Xs_trans = transfor.transfer(Xs)
 
 # ... or immediately
-Xs_trans = detector.fit_transfer(Xs, Xt)
+Xs_trans = transfor.fit_transfer(Xs, Xt)
 ```
 
 ### Domain adaptation techniques
@@ -69,11 +69,14 @@ Given a source domain {**Xs**, *Ys*} and a target domain {**Xt**, *Yt*}, the alg
 from transfertools.models import TCA, CORAL
 
 # train
-detector = CORAL()
-detector.fit(Xs, Xt)
+transfor = CORAL()
+transfor.fit(Xs, Xt)
 
 # predict
-Xs_trans = detector.transfer(Xs)
+Xs_trans = transfor.transfer(Xs)
+
+# ... or immediately
+Xs_trans = transfor.fit_transfer(Xs, Xt)
 ```
 
 ## Package structure
