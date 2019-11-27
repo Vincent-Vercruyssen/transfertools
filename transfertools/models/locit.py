@@ -64,7 +64,7 @@ class LocIT(BaseEstimator, BaseDetector):
     """
 
     def __init__(self,
-                 psi=30,
+                 psi=10,
                  transfer_threshold=0.5,
                  train_selection='random',
                  scaling='standard',
@@ -81,7 +81,7 @@ class LocIT(BaseEstimator, BaseDetector):
         self.train_selection = str(train_selection).lower()
 
         # type
-        self.type_ = 'domain_adaptation'
+        self.type_ = 'instance_selection'
 
     def fit(self, Xs=None, Xt=None, ys=None, yt=None):
         """ Fit the model on data X.
