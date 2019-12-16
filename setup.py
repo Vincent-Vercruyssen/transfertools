@@ -28,7 +28,7 @@ config = {
     'description':'A compact Python toolbox for transfer learning.',
     'long_description': readme(),
     'long_description_content_type': 'text/markdown',
-    'url': 'https://github.com/Vincent-Vercruyssen/anomatools',
+    'url': 'https://github.com/Vincent-Vercruyssen/transfertools',
     'author': 'Vincent Vercruyssen',
     'author_email': 'V.Vercruyssen@gmail.com',
     'keywords': [
