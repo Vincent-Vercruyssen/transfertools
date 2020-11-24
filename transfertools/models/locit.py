@@ -159,7 +159,7 @@ class LocIT(BaseEstimator, BaseDetector):
         Xs_trans = Xs[Ixs_trans, :]
 
         if return_indices:
-            return Xs_trans, np.arange(0, ns, 1)
+            return Xs_trans, Ixs_trans
         return Xs_trans
 
     def _fit_transfer_classifier(self, Xt):
