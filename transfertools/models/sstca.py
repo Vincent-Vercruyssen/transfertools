@@ -17,6 +17,7 @@ import scipy as sp
 
 from sklearn.base import BaseEstimator
 from scipy.sparse.linalg import eigs
+from scipy.spatial.distance import cdist as sp_cdist
 
 from .base import BaseDetector
 from ..utils.preprocessing import TransferScaler
