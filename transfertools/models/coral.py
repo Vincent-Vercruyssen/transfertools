@@ -34,6 +34,11 @@ class CORAL(BaseEstimator, BaseDetector):
         Scale the source and target domain before transfer.
         Standard scaling is indicated in the paper.
 
+    lambda_ : float, optional (default=1.0)
+        Value to multiply the diagonal of the covariance matrix by,
+        to increase regularization. lambda_=1.0 is used for most
+        experiments in the original CORAL paper.
+
     Attributes
     ----------
     type_ : str
@@ -48,12 +53,15 @@ class CORAL(BaseEstimator, BaseDetector):
 
     def __init__(self,
                  scaling='standard',
+                 lambda_=1.0,
                  tol=1e-8,
                  verbose=False):
         super().__init__(
             scaling=scaling,
             tol=tol,
             verbose=verbose)
+
+        self.lambda_ = lambda_
         
         # type
         self.type_ = 'domain_adaptation'
@@ -90,8 +98,8 @@ class CORAL(BaseEstimator, BaseDetector):
         Xs = self.source_scaler_.fit_transform(Xs)
 
         # align covariances: denoising - noising transformation
-        Cs = np.cov(Xs.T) + np.eye(nfs)
-        Ct = np.cov(Xt.T) + np.eye(nft)
+        Cs = np.cov(Xs.T) + (self.lambda_ * np.eye(nfs))
+        Ct = np.cov(Xt.T) + (self.lambda_ * np.eye(nft))
         csp = sp.linalg.fractional_matrix_power(Cs, -1/2)
         ctp = sp.linalg.fractional_matrix_power(Ct, 1/2)
         self.A_ = np.dot(csp, ctp)
