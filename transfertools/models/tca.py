@@ -144,14 +144,12 @@ class TCA(BaseEstimator, BaseDetector):
                 regct += 1
 
         # coefficient matrix L
-        L = np.vstack((
-            np.hstack((
-                np.ones((ns, ns)) / ns ** 2,
-                -1.0 * np.ones((ns, nt)) / (ns * nt))),
-            np.hstack((
-                -1.0 * np.ones((nt, ns)) / (ns * nt),
-                np.ones((nt, nt)) / (nt ** 2)))
-            ))
+        L = np.block([
+            [np.ones((ns, ns)) / ns ** 2,
+             -1.0 * np.ones((ns, nt)) / (ns * nt)],
+            [-1.0 * np.ones((nt, ns)) / (ns * nt),
+             np.ones((nt, nt)) / (nt ** 2)]
+            ])
 
         # centering matrix H
         H = np.eye(ns + nt) - np.ones((ns + nt, ns + nt)) / float(ns + nt)
